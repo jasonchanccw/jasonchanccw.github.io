@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Flutter 开发环境搭建 ( OS X )此文档归纳在Mac OS系统下搭建 Flutter 开发环境的坑，参考教程见下面的链接。官方教程中其它通俗易懂的步骤这里就不做赘述。 系统环境：OS X 10.14.0 beta Xcode : 9.4.1 &amp;amp; 10.0 beta 4 参考教程：https://flutterchina.club/setup-macos/ flutter 版本：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flutter开发环境搭建-OSX">
+<meta property="og:url" content="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/index.html">
+<meta property="og:site_name" content="Jason 写字的地方">
+<meta property="og:description" content="Flutter 开发环境搭建 ( OS X )此文档归纳在Mac OS系统下搭建 Flutter 开发环境的坑，参考教程见下面的链接。官方教程中其它通俗易懂的步骤这里就不做赘述。 系统环境：OS X 10.14.0 beta Xcode : 9.4.1 &amp;amp; 10.0 beta 4 参考教程：https://flutterchina.club/setup-macos/ flutter 版本：">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/flutter_doctor_result.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/libimobileddeviceInstallError.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/brewPodLinkError.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/vscodeExten_dart.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/vscodeExten_flutter.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/flutter_doctor_ok_result.png">
+<meta property="og:updated_time" content="2018-09-11T11:59:59.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flutter开发环境搭建-OSX">
+<meta name="twitter:description" content="Flutter 开发环境搭建 ( OS X )此文档归纳在Mac OS系统下搭建 Flutter 开发环境的坑，参考教程见下面的链接。官方教程中其它通俗易懂的步骤这里就不做赘述。 系统环境：OS X 10.14.0 beta Xcode : 9.4.1 &amp;amp; 10.0 beta 4 参考教程：https://flutterchina.club/setup-macos/ flutter 版本：">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/flutter_doctor_result.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/"/>
+
+
+
+
+
+  <title>flutter开发环境搭建-OSX | Jason 写字的地方</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jason 写字的地方</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lettie❤️">
+          <a href="/Lettie/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Lettie❤️
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/11/flutter开发环境搭建-OSX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Chan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jason 写字的地方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">flutter开发环境搭建-OSX</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T15:18:43+08:00">
+                2018-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Flutter-开发环境搭建-OS-X"><a href="#Flutter-开发环境搭建-OS-X" class="headerlink" title="Flutter 开发环境搭建 ( OS X )"></a>Flutter 开发环境搭建 ( OS X )</h1><p>此文档归纳在<code>Mac OS</code>系统下搭建 Flutter 开发环境的坑，参考教程见下面的链接。官方教程中其它通俗易懂的步骤这里就不做赘述。</p>
+<p>系统环境：OS X 10.14.0 beta</p>
+<p>Xcode : 9.4.1 &amp; 10.0 beta 4</p>
+<p>参考教程：<a href="https://flutterchina.club/setup-macos/" target="_blank" rel="noopener">https://flutterchina.club/setup-macos/</a></p>
+<p>flutter 版本：beta 0.7.3</p>
+<h2 id="获取和安装-Flutter-SDK"><a href="#获取和安装-Flutter-SDK" class="headerlink" title="获取和安装 Flutter SDK"></a>获取和安装 Flutter SDK</h2><ol>
+<li>目前 Flutter 只有 beta 版本和 dev 版本可供下载，文档使用的是最新的 beta 版本，版本号为 0.7.3。</li>
+</ol>
+<p>下载页链接：<a href="https://flutter.io/sdk-archive/#macos" target="_blank" rel="noopener">https://flutter.io/sdk-archive/#macos</a></p>
+<ol start="2">
+<li>解压安装包到自定义目录，eg：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/</span><br><span class="line">unzip ~/Downloads/flutter_macos_v0.7.3-beta.zip</span><br></pre></td></tr></table></figure>
+<p>解压完成后，会在 <code>~/</code> 目录下出现一个 <code>flutter</code> 文件夹</p>
+<ol start="3">
+<li>添加 flutter 环境变量到 $PATH </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=`pwd`/flutter/bin:$PATH</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里注意，export 进 $PATH 的路径必须是上面解压后的 flutter/bin 目录的路径</p>
+</blockquote>
+<h3 id="运行-flutter-doctor"><a href="#运行-flutter-doctor" class="headerlink" title="运行 flutter doctor"></a>运行 flutter doctor</h3><p>这个命令用来检验 flutter 是否安装成功，并且查看是否需要安装其它依赖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="/2018/09/11/flutter开发环境搭建-OSX/flutter_doctor_result.png" alt="flutter_doctor_result"></p>
+<p>从运行结果来看，flutter 和 Android toochain 已经没有问题，iOS toochain 存在两个问题。</p>
+<p>针对存在的问题，控制台输出会提供修复建议</p>
+<h4 id="flutter-命令失效的问题"><a href="#flutter-命令失效的问题" class="headerlink" title="flutter 命令失效的问题"></a>flutter 命令失效的问题</h4><p>在之后的使用过程中发现，<code>flutter</code> 命令会失效，并且原先 Export 到 $PATH 中的 flutter 路径变量莫名消失。</p>
+<p>这里提供解决方案，解决方案应该是不唯一的。</p>
+<ol>
+<li>终端执行 <code>sudo touch /etc/paths.d/flutter</code> ，在 $PATH 目标路径下新增变量文件。</li>
+<li>终端执行 <code>sudo vim /etc/paths.d/flutter</code> ，打开新建的 flutter 文件进行编辑。</li>
+<li>在文件中输入 <code>/Users/chanjason/flutter/bin (这里是替换成你系统中 flutter 安装的路径)</code>。 </li>
+<li>重启终端。</li>
+</ol>
+<h4 id="执行-brew-install-–HEAD-libimobiledevice-报-xocde-版本过低问题"><a href="#执行-brew-install-–HEAD-libimobiledevice-报-xocde-版本过低问题" class="headerlink" title="执行 brew install –HEAD libimobiledevice 报 xocde 版本过低问题"></a>执行 brew install –HEAD libimobiledevice 报 xocde 版本过低问题</h4><p><em>（如未出现，请忽略此标题以下内容）</em></p>
+<p>修复 <code>✗ libimobiledevice and ideviceinstaller are not installed.</code> 问题时，执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install --HEAD libimobiledevice</span><br></pre></td></tr></table></figure>
+<p>命令，会报出以下错误：</p>
+<p><img src="/2018/09/11/flutter开发环境搭建-OSX/libimobileddeviceInstallError.png" alt="libimobileddeviceInstallError"></p>
+<p>虽然官方文档说 Xcode 7.2 以上的版本就 OK，可能是我同时安装了 xcode 9 和 xcode 10 导致的，也可能是系统版本是 10.14 beta 导致的。</p>
+<p>这里的解决办法是使用 <code>xcode-select -switch</code> 命令把 xcode 命令行工具切换到 xcode 10 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo xcode-select -switch /Applications/Xcode-beta.app [xcode 10 的 app 文件所在路径]</span><br></pre></td></tr></table></figure>
+<p>然后再次执行 <code>brew install --HEAD libimobiledevice</code> 命令</p>
+<h4 id="CocoaPods-更新问题"><a href="#CocoaPods-更新问题" class="headerlink" title="CocoaPods 更新问题"></a>CocoaPods 更新问题</h4><p><em>若更新未出现问题，忽略此标题以下内容</em></p>
+<p>是的，Flutter 要求 CocoaPods 的最低版本是 1.5.0，我厂要求把 Pod 的版本限制在 1.4.0，更新期间还是遇到一些问题的。</p>
+<p>主要问题是使用 gem 安装的 CocoaPods 和使用 brew 安装的 Pods 同时存在了。删掉一个再安装就好。</p>
+<p>这里我完全删掉了旧 CocoaPods：</p>
+<p>使用命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem list --local | grep cocoapods</span><br></pre></td></tr></table></figure>
+<p>可以把所有 CocoaPods 相关的组件列出来，之后再执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem unistall xxx</span><br></pre></td></tr></table></figure>
+<p>将其删除。</p>
+<p>之后再使用 brew 来安装最新版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install cocoapods</span><br></pre></td></tr></table></figure>
+<p>在使用 brew 安装最新 CocoaPods 过程中出现了 <code>brew link</code> 问题，如下图所示</p>
+<p><img src="/2018/09/11/flutter开发环境搭建-OSX/brewPodLinkError.png" alt="brewPodLinkError"></p>
+<p>我的解决方案是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /usr/local/bin/xcodeproj</span><br><span class="line">brew link cocoapods</span><br></pre></td></tr></table></figure>
+<p>到目前为止，flutter 所需要的 iOS toolchain 已经 OK 了。</p>
+<h4 id="VS-Code-的-flutter-开发环境"><a href="#VS-Code-的-flutter-开发环境" class="headerlink" title="VS Code 的 flutter 开发环境"></a>VS Code 的 flutter 开发环境</h4><p>这里需要为 VS Code 新增两个拓展，在拓展搜索框中输入 <code>dart</code>，安装 <code>Dart</code> 和 <code>Flutter</code>两个拓展。</p>
+<p><img src="/2018/09/11/flutter开发环境搭建-OSX/vscodeExten_dart.png" alt="vscodeExten_dart"></p>
+<p><img src="/2018/09/11/flutter开发环境搭建-OSX/vscodeExten_flutter.png" alt="vscodeExten_dart"></p>
+<p>必须先安装 <code>Drat</code> 再安装 <code>Flutter</code>，因为 <code>Flutter</code> 是依赖 <code>Dart</code> 的。</p>
+<p>我们再次在终端执行 <code>flutter doctor</code> </p>
+<p><img src="/2018/09/11/flutter开发环境搭建-OSX/flutter_doctor_ok_result.png" alt="flutter_doctor_ok_result"></p>
+<p>所有 issue 已经解决，至此 flutter 开发环境搭建完成。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/02/iOS-FFmpeg-Xcode-编译报错问题处理/" rel="next" title="iOS FFmpeg Xcode 编译报错问题处理">
+                <i class="fa fa-chevron-left"></i> iOS FFmpeg Xcode 编译报错问题处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/14/Malformed-version-number-string-问题/" rel="prev" title="Malformed version number string 问题">
+                Malformed version number string 问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jason Chan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Flutter-开发环境搭建-OS-X"><span class="nav-number">1.</span> <span class="nav-text">Flutter 开发环境搭建 ( OS X )</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和安装-Flutter-SDK"><span class="nav-number">1.1.</span> <span class="nav-text">获取和安装 Flutter SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行-flutter-doctor"><span class="nav-number">1.1.1.</span> <span class="nav-text">运行 flutter doctor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-命令失效的问题"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">flutter 命令失效的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行-brew-install-–HEAD-libimobiledevice-报-xocde-版本过低问题"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">执行 brew install –HEAD libimobiledevice 报 xocde 版本过低问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CocoaPods-更新问题"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">CocoaPods 更新问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VS-Code-的-flutter-开发环境"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">VS Code 的 flutter 开发环境</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Chan</span>
+
+  
+</div>
+
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

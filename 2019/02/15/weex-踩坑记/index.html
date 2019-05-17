@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="weex," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="weex 直播首页采坑记录此文档收集 weex 直播首页开发过程中的遇到的一些坑点。 JSON.parse()我们在解析服务端下发的 jsonString 时，发现诸如 liveId 、userId 等字段通过 JSON.parse() 方法解析后，该字段会被强转成 Int，从而丢失精度，导致数据错误。 为解决这个问题，我们借助了一个第三方框架 lossless-json 。 lossless-j">
+<meta name="keywords" content="weex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weex 踩坑记">
+<meta property="og:url" content="http://yoursite.com/2019/02/15/weex-踩坑记/index.html">
+<meta property="og:site_name" content="Jason 写字的地方">
+<meta property="og:description" content="weex 直播首页采坑记录此文档收集 weex 直播首页开发过程中的遇到的一些坑点。 JSON.parse()我们在解析服务端下发的 jsonString 时，发现诸如 liveId 、userId 等字段通过 JSON.parse() 方法解析后，该字段会被强转成 Int，从而丢失精度，导致数据错误。 为解决这个问题，我们借助了一个第三方框架 lossless-json 。 lossless-j">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-15T06:37:21.886Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="weex 踩坑记">
+<meta name="twitter:description" content="weex 直播首页采坑记录此文档收集 weex 直播首页开发过程中的遇到的一些坑点。 JSON.parse()我们在解析服务端下发的 jsonString 时，发现诸如 liveId 、userId 等字段通过 JSON.parse() 方法解析后，该字段会被强转成 Int，从而丢失精度，导致数据错误。 为解决这个问题，我们借助了一个第三方框架 lossless-json 。 lossless-j">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/15/weex-踩坑记/"/>
+
+
+
+
+
+  <title>weex 踩坑记 | Jason 写字的地方</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jason 写字的地方</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lettie❤️">
+          <a href="/Lettie/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Lettie❤️
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/15/weex-踩坑记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Chan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jason 写字的地方">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">weex 踩坑记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-15T14:35:38+08:00">
+                2019-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="weex-直播首页采坑记录"><a href="#weex-直播首页采坑记录" class="headerlink" title="weex 直播首页采坑记录"></a>weex 直播首页采坑记录</h2><p>此文档收集 weex 直播首页开发过程中的遇到的一些坑点。</p>
+<h4 id="JSON-parse"><a href="#JSON-parse" class="headerlink" title="JSON.parse()"></a>JSON.parse()</h4><p>我们在解析服务端下发的 jsonString 时，发现诸如 <code>liveId</code> 、<code>userId</code> 等字段通过 <code>JSON.parse()</code> 方法解析后，该字段会被强转成 Int，从而丢失精度，导致数据错误。</p>
+<p>为解决这个问题，我们借助了一个第三方框架 <code>lossless-json</code> 。</p>
+<h5 id="lossless-json-使用"><a href="#lossless-json-使用" class="headerlink" title="lossless-json 使用"></a>lossless-json 使用</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> LLJSON = <span class="built_in">require</span>(<span class="string">'lossless-json'</span>)</span><br><span class="line"><span class="keyword">let</span> llpage = LLJSON.parse(jsonString, <span class="function"><span class="keyword">function</span> (<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/** 替换配置 */</span></span><br><span class="line">  <span class="keyword">if</span> (value &amp;&amp; value.isLosslessNumber) &#123;</span><br><span class="line">    <span class="keyword">return</span> value.toString()</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>从上面的代码不难看出，<code>lossless-json</code> 的原理就是将精度溢出的数字转化成字符串保存在 json 中。</p>
+<blockquote>
+<p>当然，<code>lossless-json</code> 并不是唯一的方案，还有很多能达到相同目的的框架，或者也能自己实现这个功能。</p>
+</blockquote>
+<h4 id="scroller"><a href="#scroller" class="headerlink" title="scroller"></a>scroller</h4><h5 id="crash"><a href="#crash" class="headerlink" title="crash"></a>crash</h5><p>没错，这个东西，在安卓下会崩溃。(╯‵□′)╯︵┻━┻</p>
+<h5 id="dom-scrollToElement-el-optionJson"><a href="#dom-scrollToElement-el-optionJson" class="headerlink" title="dom.scrollToElement(el, optionJson)"></a>dom.scrollToElement(el, optionJson)</h5><p>除了 <code>recycle-list</code> ，其它 weex 自带的滚动组件都可以使用这个 API 去让组件滚动到指定的 offset。</p>
+<p>打开方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> el = list 中的第一个元素;</span><br><span class="line"><span class="keyword">let</span> offset = <span class="number">200</span>; <span class="comment">// 相对于 el 的偏移量</span></span><br><span class="line">dom.scrollToElement(el, &#123;<span class="attr">offset</span>: <span class="number">200</span>, <span class="attr">animated</span>: <span class="literal">true</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>这里在安卓和 iOS 上的表现不一样：</p>
+<ul>
+<li><p>在 iOS 上比较正常，会先确定最终的 offset，再直接滚动到最终确定的 offset。下面是伪代码：</p>
+</li>
+<li><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> elOffset = el.offset; <span class="comment">// 0</span></span><br><span class="line"><span class="keyword">let</span> targetOffset = elOffset + <span class="number">200</span>; <span class="comment">// 先确定最终要滚动到的 offset</span></span><br><span class="line">scrollTo(targetOffset); <span class="comment">// 直接滚过去</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在安卓上的表现就很奇葩了，会分两次滚动，第一次先滚动到内部元素的 offset 位置，然后再滚动一个偏移量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> elOffset = el.offset; <span class="comment">// 0</span></span><br><span class="line">scrollTo(elOffset);</span><br><span class="line"><span class="keyword">let</span> offset = <span class="number">200</span>; <span class="comment">// 相对于 el 的偏移量</span></span><br><span class="line">scrollTo(offset);</span><br></pre></td></tr></table></figure>
+<p>整个效果非常挫。</p>
+</li>
+</ul>
+<h4 id="waterfall"><a href="#waterfall" class="headerlink" title="waterfall"></a>waterfall</h4><p>一开始调研的时候，我们觉得 <code>waterfall</code> 是 weex 最适合用来实现直播首页的组件。于是我们就开干了。</p>
+<h5 id="直播卡片布局"><a href="#直播卡片布局" class="headerlink" title="直播卡片布局"></a>直播卡片布局</h5><p>由于<strong>通栏广告</strong>的存在，我们在直播卡片布局这里做了点骚操作：并没有把每张直播卡片作为一个 cell，而是让同一行并排的两张直播卡片放在同一个 cell 里面，这样我们自定义的 <code>waterfall</code> 的 cell 就可以同时兼容直播卡片和通栏广告了。当然，这个骚操作还要对 <code>waterfall</code> 的数据源数组要做二次封装。</p>
+<h5 id="安卓-sticky-header-不生效问题"><a href="#安卓-sticky-header-不生效问题" class="headerlink" title="安卓 sticky header 不生效问题"></a>安卓 sticky header 不生效问题</h5><p><code>waterfall</code> 的子节点 <code>&lt;header&gt;</code> 为 <code>sticky</code> 时，安卓是不生效的。一开始我们在 weex 层做平台区分，iOS 使用 <code>waterfall</code> 的 sticky header，而安卓就自己实现。</p>
+<p>后来经过研究，安卓 weex SDK v0.19.0 之后修复了该问题。</p>
+<h5 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h5><p>在我们基本完成 UI 开发，进入自测阶段的时候，我们发现在 iOS 上 <code>waterfall</code> 在快速滑动和加载更多直播卡片的时候，会出现严重卡顿，在高性能机器上面也会卡顿得非常厉害，与原生的性能和体验差距巨大。我们通过 review weex SDK 在 iOS 上的源码，发现 <code>waterfall</code> 组件是基于原生的 <code>collectionView</code> 实现的，它的 cell 本身是重用的，但是 cell 内部的我们使用 weex 布局出来的元素却不是重用的。也就是说，我们往 <code>waterfall</code> 的 cell 里面更新数据，cell 内部原有的视图会被销毁，再重新创建，即便这个 cell 复用前后承载的数据类型是相同。</p>
+<h4 id="recycle-list"><a href="#recycle-list" class="headerlink" title="recycle-list"></a>recycle-list</h4><p>我们用 <code>waterfall</code> 实现了第一版直播首页之后，测试过程发现了严重的性能问题。于是我们就寄希望于 <code>recycle-list</code> ，希望它能解决 <code>waterfall</code> 上的各种性能问题。然而 <code>recycle-list</code> 却为我们带来了更多的，难以避免的问题。</p>
+<p><code>recycle-list</code> 只能使用<code>&lt;cell-slot&gt;</code>作为其子节点。</p>
+<h5 id="cell-slot"><a href="#cell-slot" class="headerlink" title="cell-slot"></a>cell-slot</h5><p><code>&lt;cell-slot&gt;</code> 代表的是列表每一项的<strong>模板</strong>，它只用来描述模板的结构，并不对应实际的节点。<code>&lt;cell-slot&gt;</code> 的个数只表示模板的种类数，真实列表项的个数是由数据决定的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;cell-slot <span class="keyword">case</span>=<span class="string">"bannerItemType"</span>&gt;</span><br><span class="line">  ...            </span><br><span class="line">&lt;<span class="regexp">/cell-slot&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;cell-slot case="miniPropsRankItemType"&gt;</span></span><br><span class="line"><span class="regexp">  ...</span></span><br><span class="line"><span class="regexp">&lt;/</span>cell-slot&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>个人觉得 <code>recycle-list</code> 的思想和 iOS 中 <code>CollectionView</code> 组件的思想是一样的。<code>CollectionViewCell</code> 复用的时候需要为其绑定一个 <code>cell identification</code> 。其实 <code>weex</code> 的 <code>recycle-list</code> 在 iOS 原生的实现就是基于 <code>CollectionView</code> 的。</p>
+</blockquote>
+<p>好了，步入正题，开始吐槽 <code>&lt;cell-slot&gt;</code> 的坑点：</p>
+<ul>
+<li>无法获取内部任何节点的引用。这个坑点的存在，制约了很多后续业务功能的实现，首当其冲的就是，我们无法上报打点信息，80%曝光条件也无法知道，还有就是无法让整个 <code>recycle-list</code> 滚动到指定的位置等等。随便一个就无法让我们继续使用 <code>recycle-list</code> 完成后续开发了。</li>
+<li>内部的自定义组件无法单独抽离成一个文件，必须跟 <code>recycle-list</code> 和 <code>&lt;cell-slot&gt;</code> 写在同一个文件里。否则，自定义组件内部的事件是无法回调到 <code>recycle-list</code> 和 <code>&lt;cell-slot&gt;</code> 这一层的。这个虽然能写在同一个文件里面解决，但是对于代码的规范化非常不友好。</li>
+<li>至今不能基于 <code>recycle-list</code> 实现一个靠谱的、手感 OK 的<strong>下拉刷新</strong>功能。</li>
+</ul>
+<p>最后我们用回了 <code>waterfall</code>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/weex/" rel="tag"># weex</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/14/Malformed-version-number-string-问题/" rel="next" title="Malformed version number string 问题">
+                <i class="fa fa-chevron-left"></i> Malformed version number string 问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jason Chan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#weex-直播首页采坑记录"><span class="nav-number">1.</span> <span class="nav-text">weex 直播首页采坑记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON-parse"><span class="nav-number">1.0.1.</span> <span class="nav-text">JSON.parse()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#lossless-json-使用"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">lossless-json 使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scroller"><span class="nav-number">1.0.2.</span> <span class="nav-text">scroller</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#crash"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">crash</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dom-scrollToElement-el-optionJson"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">dom.scrollToElement(el, optionJson)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#waterfall"><span class="nav-number">1.0.3.</span> <span class="nav-text">waterfall</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#直播卡片布局"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">直播卡片布局</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安卓-sticky-header-不生效问题"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">安卓 sticky header 不生效问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#性能问题"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">性能问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#recycle-list"><span class="nav-number">1.0.4.</span> <span class="nav-text">recycle-list</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cell-slot"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">cell-slot</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Chan</span>
+
+  
+</div>
+
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
